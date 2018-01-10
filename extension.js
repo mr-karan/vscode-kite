@@ -20,14 +20,19 @@ function activate(context) {
     // The command has been defined in the package.json file
     // Now provide the implementation of the command with  registerCommand
     // The commandId parameter must match the command field in package.json
-    let disposable = vscode.commands.registerCommand('extension.initializeKite', function (stock) {
+    let quote = vscode.commands.registerCommand('extension.getQuote', function (stock) {
         // The code you place here will be executed every time your command is executed
         vscode.window.showInformationMessage(stock);
         for (let s of config['symbols']) {
             kc.quote(config['exchange'], s)
             .then(function(response) {
                 console.log(response)
-                vscode.window.showInformationMessage(`${s} LTP: ${response.data['last_price']} `);
+                let open = response.data.ohlc['open']
+                let close= response.data.ohlc['close']
+                let ltp = response.data['last_price']
+                let high = response.data.ohlc['high']
+                let low = response.data.ohlc['low']
+                vscode.window.showInformationMessage(`${s} LTP: ${ltp} Open: ${open} High: ${high} Low: ${low} Close: ${close}`);
             }).catch(function(err) {
                 vscode.window.showErrorMessage(err);
             });
@@ -46,7 +51,7 @@ function activate(context) {
         
     });
     context.subscriptions.push(margin);
-    context.subscriptions.push(disposable);
+    context.subscriptions.push(quote);
 }
 exports.activate = activate;
 

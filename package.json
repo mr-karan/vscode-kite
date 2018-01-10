@@ -11,7 +11,7 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.initializeKite",
+        "onCommand:extension.getQuote",
         "onCommand:extension.fetchMargin"
     ],
     "main": "./extension",
@@ -45,14 +45,14 @@
         },
         "commands": [
             {
-                "command": "extension.initializeKite",
-                "title": "Kite Init",
+                "command": "extension.getQuote",
+                "title": "Quote",
                 "category": "Kite",
                 "arguments": "symbol"
             },
             {
                 "command": "extension.fetchMargin",
-                "title": "Kite Margin",
+                "title": "Margin",
                 "category": "Kite"
             }
         ]
