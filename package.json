@@ -11,17 +11,41 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.sayHello"
+        "onCommand:extension.initializeKite"
     ],
     "main": "./extension",
     "contributes": {
+        "configuration": {
+            "properties": {
+                "vscode-kite.symbols": {
+                    "type": "array",
+                    "default": [
+                        "INFY",
+                        "CDSL"
+                    ],
+                    "description": "Stocks that you want to track"
+                },
+                "vscode-kite.exchange": {
+                    "type": "string",
+                    "default": "NSE",
+                    "description": "Fetch data from exchange. Default: NSE"
+                },
+                "vscode-kite.access_token": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Access Token for KiteConnect API"
+                }
+            }
+        },
         "commands": [
             {
-                "command": "extension.sayHello",
-                "title": "Hello World"
+                "command": "extension.initializeKite",
+                "title": "Kite Init",
+                "category": "Hello"
             }
         ]
     },
+
     "scripts": {
         "postinstall": "node ./node_modules/vscode/bin/install",
         "test": "node ./node_modules/vscode/bin/test"
@@ -32,5 +56,8 @@
         "eslint": "^4.6.1",
         "@types/node": "^7.0.43",
         "@types/mocha": "^2.2.42"
+    },
+    "dependencies": {
+        "kiteconnect": "^1.2.2"
     }
 }
