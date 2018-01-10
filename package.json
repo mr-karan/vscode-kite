@@ -30,6 +30,11 @@
                     "default": "NSE",
                     "description": "Fetch data from exchange. Default: NSE"
                 },
+                "vscode-kite.api_key": {
+                    "type": "string",
+                    "default": "",
+                    "description": "API Key for KiteConnect App"
+                },
                 "vscode-kite.access_token": {
                     "type": "string",
                     "default": "",

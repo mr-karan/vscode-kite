@@ -1,10 +1,12 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 var KiteConnect = require("kiteconnect").KiteConnect;
-
-var kc = new KiteConnect("z6i1u07uz6kofv7b");
-
 const vscode = require('vscode');
+
+const config = vscode.workspace.getConfiguration('vscode-kite')
+
+var kc = new KiteConnect(config['api_key']);
+
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -13,8 +15,7 @@ function activate(context) {
     // Use the console to output diagnostic information (console.log) and errors (console.error)
     // This line of code will only be executed once when your extension is activated
     console.log('Congratulations, your extension "vscode-kite" is now active!');
-    console.log("Kite is", kc)
-    config = vscode.workspace.getConfiguration('vscode-kite')
+    console.log("Kite instance:", kc)
     kc.setAccessToken(config['access_token'])
     // The command has been defined in the package.json file
     // Now provide the implementation of the command with  registerCommand
@@ -25,12 +26,12 @@ function activate(context) {
             kc.quote(config['exchange'], s)
             .then(function(response) {
                 console.log(response)
+                vscode.window.showInformationMessage(`${s} LTP: ${response.data['last_price']} `);
             }).catch(function(err) {
                 console.log(err)
             });
         }
         // Display a message box to the user
-        vscode.window.showInformationMessage('KiteInitialized !');
     });
 
     context.subscriptions.push(disposable);
