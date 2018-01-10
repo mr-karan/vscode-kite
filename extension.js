@@ -17,6 +17,8 @@ function activate(context) {
     // This line of code will only be executed once when your extension is activated
     console.log('Congratulations, your extension "vscode-kite" is now active!');
     console.log("Kite instance:", kc)
+
+
     // The command has been defined in the package.json file
     // Now provide the implementation of the command with  registerCommand
     // The commandId parameter must match the command field in package.json
@@ -32,6 +34,7 @@ function activate(context) {
                 let ltp = response.data['last_price']
                 let high = response.data.ohlc['high']
                 let low = response.data.ohlc['low']
+                // vscode.window.setStatusBarMessage("LOL");
                 vscode.window.showInformationMessage(`${s} LTP: ${ltp} Open: ${open} High: ${high} Low: ${low} Close: ${close}`);
             }).catch(function(err) {
                 vscode.window.showErrorMessage(err);
@@ -40,6 +43,7 @@ function activate(context) {
         // Display a message box to the user
     });
     let margin = vscode.commands.registerCommand('extension.fetchMargin', function () {
+        // vscode.window.setStatusBarMessage("ROFL");
         // The code you place here will be executed every time your command is executed
             kc.margins("equity")
             .then(function(response) {
@@ -52,6 +56,7 @@ function activate(context) {
     });
     context.subscriptions.push(margin);
     context.subscriptions.push(quote);
+
 }
 exports.activate = activate;
 
