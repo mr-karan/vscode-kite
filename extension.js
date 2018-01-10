@@ -5,7 +5,8 @@ const vscode = require('vscode');
 
 const config = vscode.workspace.getConfiguration('vscode-kite')
 
-var kc = new KiteConnect(config['api_key']);
+const kc = new KiteConnect(config['api_key']);
+kc.setAccessToken(config['access_token'])
 
 
 // this method is called when your extension is activated
@@ -16,24 +17,35 @@ function activate(context) {
     // This line of code will only be executed once when your extension is activated
     console.log('Congratulations, your extension "vscode-kite" is now active!');
     console.log("Kite instance:", kc)
-    kc.setAccessToken(config['access_token'])
     // The command has been defined in the package.json file
     // Now provide the implementation of the command with  registerCommand
     // The commandId parameter must match the command field in package.json
-    let disposable = vscode.commands.registerCommand('extension.initializeKite', function () {
+    let disposable = vscode.commands.registerCommand('extension.initializeKite', function (stock) {
         // The code you place here will be executed every time your command is executed
+        vscode.window.showInformationMessage(stock);
         for (let s of config['symbols']) {
             kc.quote(config['exchange'], s)
             .then(function(response) {
                 console.log(response)
                 vscode.window.showInformationMessage(`${s} LTP: ${response.data['last_price']} `);
             }).catch(function(err) {
-                console.log(err)
+                vscode.window.showErrorMessage(err);
             });
         }
         // Display a message box to the user
     });
-
+    let margin = vscode.commands.registerCommand('extension.fetchMargin', function () {
+        // The code you place here will be executed every time your command is executed
+            kc.margins("equity")
+            .then(function(response) {
+                console.log("Margin:", response)
+                vscode.window.showInformationMessage(`Margin: ${response.data['net']} `);
+            }).catch(function(err) {
+                vscode.window.showInformationMessage(err);
+            });
+        
+    });
+    context.subscriptions.push(margin);
     context.subscriptions.push(disposable);
 }
 exports.activate = activate;
