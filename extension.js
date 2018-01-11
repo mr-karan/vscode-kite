@@ -8,6 +8,25 @@ const config = vscode.workspace.getConfiguration('vscode-kite')
 const kc = new KiteConnect(config['api_key']);
 kc.setAccessToken(config['access_token'])
 
+var KiteTicker = require("kiteconnect").KiteTicker;
+var ticker = new KiteTicker(config['api_key'], 'ZV3952', '90e4a6d6913badded9bfe70345604cc9');
+
+ticker.connect();
+ticker.on("tick", setTick);
+ticker.on("connect", subscribe);
+
+function setTick(ticks) {
+    let ltp_s = `Ticks : ${ticks[0]['LastTradedPrice']}`;
+    // vscode.window.setStatusBarMessage(ticks[0]['LastTradedPrice']);
+    console.log(ltp_s);
+    vscode.window.setStatusBarMessage(ltp_s);
+}
+
+function subscribe() {
+	var items = [738561];
+	ticker.subscribe(items);
+	ticker.setMode(ticker.modeFull, items);
+}
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed

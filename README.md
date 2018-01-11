@@ -1,4 +1,4 @@
-# vscode-kite README
+# vscode-kite
 
 ## Features
 
