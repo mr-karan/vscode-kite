@@ -12,7 +12,9 @@
     ],
     "activationEvents": [
         "onCommand:extension.getQuote",
-        "onCommand:extension.fetchMargin"
+        "onCommand:extension.fetchMargin",
+        "onCommand:extension.streamData",
+        "onCommand:extension.initializeKite"
     ],
     "main": "./extension",
     "contributes": {
@@ -20,10 +22,7 @@
             "properties": {
                 "vscode-kite.symbols": {
                     "type": "array",
-                    "default": [
-                        "INFY",
-                        "CDSL"
-                    ],
+                    "default": [],
                     "description": "Stocks that you want to track"
                 },
                 "vscode-kite.exchange": {
@@ -36,10 +35,20 @@
                     "default": "",
                     "description": "API Key for KiteConnect App"
                 },
-                "vscode-kite.access_token": {
+                "vscode-kite.request_token": {
                     "type": "string",
                     "default": "",
-                    "description": "Access Token for KiteConnect API"
+                    "description": "Request Token for KiteConnect API"
+                },
+                "vscode-kite.api_secret": {
+                    "type": "string",
+                    "default": "",
+                    "description": "API Secret for KiteConnect API"
+                },
+                "vscode-kite.live_stocks": {
+                    "type": "array",
+                    "default": [],
+                    "description": "Add instrument tokens for live LTP Streaming"
                 }
             }
         },
@@ -47,12 +56,21 @@
             {
                 "command": "extension.getQuote",
                 "title": "Quote",
-                "category": "Kite",
-                "arguments": "symbol"
+                "category": "Kite"
             },
             {
                 "command": "extension.fetchMargin",
                 "title": "Margin",
+                "category": "Kite"
+            },
+            {
+                "command": "extension.streamData",
+                "title": "Stream",
+                "category": "Kite"
+            },
+            {
+                "command": "extension.initializeKite",
+                "title": "Login",
                 "category": "Kite"
             }
         ]
