@@ -49,6 +49,11 @@
                     "type": "array",
                     "default": [],
                     "description": "Add instrument tokens for live LTP Streaming"
+                },
+                "vscode-kite.test": {
+                    "type": "array",
+                    "default": [],
+                    "description": "Add instrument tokens for live LTP Streaming"
                 }
             }
         },
@@ -75,7 +80,6 @@
             }
         ]
     },
-
     "scripts": {
         "postinstall": "node ./node_modules/vscode/bin/install",
         "test": "node ./node_modules/vscode/bin/test"
@@ -88,6 +92,7 @@
         "@types/mocha": "^2.2.42"
     },
     "dependencies": {
-        "kiteconnect": "^1.2.2"
+        "kiteconnect": "^1.2.2",
+        "store": "^2.0.12"
     }
 }
