@@ -7,10 +7,10 @@
 * Fetch live market prices through websocket support.
 
 
-
 ![Commands](images/commands.png "Available Commands")
-![OHLC](images/ohlc.png "Quote data for the instrument")
-![Commands](images/margin.png "Margin available")
+![OHLC](images/quote.gif "Quote data for the instrument")
+![Commands](images/margin.gif "Margin available")
+![Stream](images/stream.png "Realtime stock prices")
 
 ## Requirements
 
