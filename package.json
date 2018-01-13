@@ -4,6 +4,7 @@
     "description": "Extension to get real time data for Indian Stock Markets with Zerodha's KiteConnect API",
     "version": "0.0.1",
     "publisher": "mrkaran",
+    "icon": "images/kite-logo.png",
     "repository": {
         "type": "git",
         "url": "https://github.com/mr-karan/vscode-kite"
