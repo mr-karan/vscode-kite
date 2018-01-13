@@ -1,5 +1,7 @@
 # vscode-kite
 
+https://marketplace.visualstudio.com/items?itemName=mrkaran.vscode-kite
+
 ## Features
 
 * Fetch quote data for the given list of stocks.
